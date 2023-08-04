@@ -21,4 +21,14 @@ class Contato:
     def nome(self, nome:str ):
         self.__nome = nome
 
-    
+    @telefone.setter
+    def telefone(self, telefone: str):
+        self.__telefone = telefone
+
+
+
+
+if __name__ == "__main__":
+    # Teste da classe Contato
+    contato1 = Contato("João", "123456789")
+    print(contato1)

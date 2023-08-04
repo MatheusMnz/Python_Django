@@ -43,43 +43,44 @@ class ContatosApp:
         self.__regras_negocio.repositorio_contatos.salvar_em_arquivo(nome_arquivo)
 
 
-    def __loop_principal(self)->None:
+    def __loop_principal(self) -> None:
         opcao = -1
-        while opcao!=6:
+        while opcao != 6:
             self.__exibe_menu()
             opcao = self.__opcao_selecionada()
-            if opcao==1:
+            if opcao == 1:
                 contato = self.__ler_dados_contato()
                 if self.__regras_negocio.incluir(contato) != None:
                     print('\nContato cadastrado com sucesso.')
-            elif opcao==2:
+            elif opcao == 2:
                 contato = self.__ler_dados_contato()
                 if self.__regras_negocio.alterar(contato) != None:
                     print('\nContato alterado com sucesso.')
-            elif opcao==3:
+            elif opcao == 3:
                 self.__limpar_tela()
                 telefone = input('\nTelefone: ')
                 if self.__regras_negocio.excluir(telefone) != None:
-                    print('\nContato excluido.')
-            elif opcao==4:
+                    print('\nContato excluído.')
+            elif opcao == 4:
                 self.__limpar_tela()
                 nome = input('\nDigite o nome do contato a localizar: ')
                 contato = self.__regras_negocio.consultar(nome)
                 if contato != None:
                     print(f'Contato encontrado: \n{contato}\n')
-            elif opcao==5:
+            elif opcao == 5:
                 self.__limpar_tela()
                 if not self.__regras_negocio.repositorio_contatos.vazio():
-                    for contato in self.__regras_negocio.repositorio_contatos.repositorio_contatos:
+                    for i in range(len(self.__regras_negocio.repositorio_contatos)):
+                        contato = self.__regras_negocio.repositorio_contatos[i]
                         print(f'\n{contato}\n')
                 else:
                     print(f'\nNenhum contato cadastrado.')
-            if opcao!=6:
+            if opcao != 6:
                 input('Tecle enter para retornar ao menu...')
 
         self.salvar_contatos_em_arquivo('/home/matheus/work/python_django_/cap11/ex1/contatos.txt')
 
-app = ContatosApp()
 
-        
-    
+if __name__ == "__main__":
+    # Teste da classe ContatosApp
+    app = ContatosApp()

@@ -5,11 +5,16 @@ class RepositorioContatos:
     def __init__(self) -> None:
         self.__repositorio_contatos = []
 
-
     @property
     def repositorio_contatos(self)-> str:
         return self.__repositorio_contatos
     
+
+    def __getitem__(self, index: int) -> Contato:
+        return self.__repositorio_contatos[index]
+
+    def __len__(self) -> int:
+        return len(self.__repositorio_contatos)
 
     def incluir(self, contato: Contato) -> Contato:
         resultado = None
@@ -90,3 +95,14 @@ class RepositorioContatos:
         except IOError as e:
             print(f"Erro ao salvar o arquivo: {str(e)}")
     
+
+if __name__ == "__main__":
+    repositorio = RepositorioContatos()
+    contato1 = Contato("João", "123456789")
+    contato2 = Contato("Maria", "987654321")
+
+    repositorio.incluir(contato1)
+    repositorio.incluir(contato2)
+
+    for i in range(len(repositorio)):
+        print(repositorio[i])
