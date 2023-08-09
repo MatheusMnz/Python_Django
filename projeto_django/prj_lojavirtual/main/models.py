@@ -15,8 +15,6 @@ class Categoria(models.Model):
         return self.nome
 
 
-
-
 class Produto(models.Model):
     #Criando um relacionamento um-para-muitos
     categoria = models.ForeignKey(Categoria, related_name="produtos", null=True, on_delete=models.CASCADE)
