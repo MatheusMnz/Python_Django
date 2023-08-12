@@ -1,12 +1,12 @@
-from django.conf import settings
-from django.conf.urls import url
 from django.urls import path
 from . import views
 from django.views.generic import TemplateView
-from django.conf.urls.static import static
 
 app_name='main'
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('produtos/', views.listar_produtos, name='listar_produtos'),
+    path('produtos/<str:slug_categoria>/', views.listar_produtos, name='listar_produtos_por_categoria'),
+    path('produto/<str:slug_produto>/', views.detalhes_produto, name='detalhes_do_produto'),
+]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=150, db_index=True)
@@ -10,9 +11,12 @@ class Categoria(models.Model):
         ordering = ("nome", )
         verbose_name = "categoria"
         verbose_name_plural = "categorias"
-
+        
     def __str__(self):
         return self.nome
+    
+    def get_absolute_url(self):
+        return reverse("main:listar_produtos_por_categoria", args=[self.slug])
 
 
 class Produto(models.Model):
@@ -23,7 +27,8 @@ class Produto(models.Model):
     descricao = models.TextField(blank=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     disponivel = models.BooleanField(default=True)
-    estoque = models.DateTimeField(auto_now_add=True)
+    estoque = models.PositiveIntegerField()
+    data_criacao = models.DateField(auto_now=True)
     data_ultima_atualizacao = models.DateTimeField(auto_now=True)
     imagem = models.ImageField(upload_to="imagens-produtos", blank=True)
 
@@ -31,14 +36,10 @@ class Produto(models.Model):
         ordering = ("nome", )
         index_together = (("id", "slug"),)
 
-    # def save(self, *args, **kwargs):
-    #     print("O método save() foi acionado")
-    #     print(f"Parâmetros: *args: {args}, **kwargs: {kwargs}")
-    #     # Executa o método save da classe ancestral
-    #     super(Produto, self).save(*args, **kwargs)
-
-
     def __str__(self):
         return self.nome
+    
+    def get_absolute_url(self):
+        return reverse("main:detalhes_do_produto", args=[self.slug])
     
     

@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_FALE_CONOSCO = "matheus.menezes0806@gmail.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "imagens-produtos")
 
 # Application definition
 
